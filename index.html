@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#3b82f6">
+    <meta name="description" content="منصة دفعتنا التعليمية - نسخة محسّنة v8.0">
+    <title>منصة دفعتنا | Dof3atna Enhanced v8.0</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>">
+
+    <!-- Suppress Tailwind CDN Warning -->
+    <script>
+        (function () {
+            var oldWarn = console.warn;
+            console.warn = function (message) {
+                if (typeof message === 'string' && message.includes('cdn.tailwindcss.com')) return;
+                oldWarn.apply(console, arguments);
+            };
+        })();
+    </script>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts (Cairo) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.7.32/sweetalert2.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.7.32/sweetalert2.all.min.js"></script>
+
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        cairo: ['Cairo', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#3b82f6',
+                        oled: '#000000',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/effects.css">
+    <link rel="stylesheet" href="css/toast.css">
+    <link rel="stylesheet" href="css/enhanced-components.css">
+
+    <style>
+        /* SweetAlert2 Dark Mode Custom Styles */
+        .swal-dark {
+            background: rgba(17, 25, 40, 0.95) !important;
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .swal-dark .swal2-title,
+        .swal-dark .swal2-content {
+            color: #ffffff !important;
+        }
+
+        .swal-dark .swal2-html-container {
+            color: rgba(255, 255, 255, 0.8) !important;
+        }
+    </style>
+</head>
+
+<body class="antialiased selection:bg-blue-500 selection:text-white">
+
+    <!-- ==================== Loading Skeleton Screen ==================== -->
+    <div id="skeleton-screen" class="fixed inset-0 z-[9999] bg-[var(--bg-main)] transition-opacity duration-500">
+        <div class="h-screen flex flex-col md:flex-row">
+            <!-- Sidebar Skeleton -->
+            <div class="hidden md:block w-72 glass-panel border-l border-white/5 p-6 space-y-4">
+                <div class="flex items-center gap-3 mb-8">
+                    <div class="w-10 h-10 rounded-xl skeleton"></div>
+                    <div class="h-6 w-24 rounded skeleton"></div>
+                </div>
+                <div class="space-y-2">
+                    <div class="h-12 rounded-xl skeleton"></div>
+                    <div class="h-12 rounded-xl skeleton"></div>
+                    <div class="h-12 rounded-xl skeleton"></div>
+                    <div class="h-12 rounded-xl skeleton"></div>
+                    <div class="h-12 rounded-xl skeleton"></div>
+                </div>
+            </div>
+
+            <!-- Main Content Skeleton -->
+            <div class="flex-1 flex flex-col">
+                <div class="h-20 glass-panel px-6 flex items-center justify-between border-b border-white/5">
+                    <div class="flex items-center gap-4">
+                        <div class="md:hidden w-10 h-10 rounded-lg skeleton"></div>
+                        <div class="h-6 w-32 rounded skeleton"></div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full skeleton"></div>
+                        <div class="w-10 h-10 rounded-full skeleton"></div>
+                        <div class="w-10 h-10 rounded-full skeleton"></div>
+                    </div>
+                </div>
+
+                <div class="flex-1 overflow-y-auto p-4 md:p-8 space-y-8">
+                    <div class="glass-panel rounded-3xl p-6 md:p-10 space-y-3">
+                        <div class="h-8 w-64 rounded skeleton"></div>
+                        <div class="h-4 w-full max-w-2xl rounded skeleton"></div>
+                        <div class="h-4 w-3/4 rounded skeleton"></div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="h-6 w-32 rounded skeleton"></div>
+                        <div class="flex gap-4 overflow-hidden">
+                            <div class="w-32 h-36 rounded-2xl skeleton flex-shrink-0"></div>
+                            <div class="w-32 h-36 rounded-2xl skeleton flex-shrink-0"></div>
+                            <div class="w-32 h-36 rounded-2xl skeleton flex-shrink-0"></div>
+                            <div class="w-32 h-36 rounded-2xl skeleton flex-shrink-0"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="md:hidden fixed bottom-4 left-4 right-4">
+                    <div class="glass-panel rounded-2xl h-16 skeleton"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== Background Layers ==================== -->
+    <div class="bg-layer bg-light-grad"></div>
+    <div class="bg-layer bg-dark-grad"></div>
+    <div class="bg-layer bg-oled-solid"></div>
+
+    <!-- ==================== Animated Particles ==================== -->
+    <div class="particles-bg" id="particles-container"></div>
+
+    <!-- ==================== Grid Pattern ==================== -->
+    <div class="fixed inset-0 opacity-[0.03] pointer-events-none z-[-1]"
+        style="background-image: linear-gradient(#808080 1px, transparent 1px), linear-gradient(to right, #808080 1px, transparent 1px); background-size: 40px 40px;">
+    </div>
+
+    <!-- ==================== Toast Container ==================== -->
+    <div id="toast-container"></div>
+
+    <!-- ==================== Main Layout Container ==================== -->
+    <div id="app-container"
+        class="relative min-h-screen flex flex-col md:flex-row overflow-hidden opacity-0 transition-opacity duration-500">
+
+        <!-- ==================== Sidebar ==================== -->
+        <aside id="sidebar"
+            class="fixed inset-y-0 right-0 w-72 glass-panel z-[60] transform translate-x-full md:translate-x-0 transition-transform duration-300 md:relative flex flex-col h-full border-l-0 md:border-l border-white/5">
+
+            <div class="p-6 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div
+                        class="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-cyan-500 flex items-center justify-center shadow-lg shadow-blue-500/20 animate-glow">
+                        <i class="fa-solid fa-graduation-cap text-xl text-white"></i>
+                    </div>
+                    <h1 class="text-2xl font-bold tracking-wide font-cairo">دفعتنا</h1>
+                </div>
+                <button id="close-sidebar"
+                    class="md:hidden text-gray-400 hover:text-primary transition bg-white/5 p-2 rounded-lg magnetic-btn">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+
+            <nav class="flex-1 px-4 py-2 space-y-2 overflow-y-auto custom-scrollbar" id="sidebar-links">
+                <!-- Links injected via JS -->
+            </nav>
+
+            <div class="p-4 border-t border-white/5 mt-auto">
+                <div id="user-profile-btn"
+                    class="glass-panel border-none bg-white/5 hover:bg-white/10 rounded-xl p-3 flex items-center gap-3 cursor-pointer group transition magnetic-btn">
+                    <img src="https://ui-avatars.com/api/?name=Student&background=667eea&color=fff" alt="User"
+                        class="w-10 h-10 rounded-full border-2 border-blue-500/50">
+                    <div class="flex-1 min-w-0">
+                        <p class="text-sm font-bold truncate">طالب جامعي</p>
+                        <p class="text-xs text-blue-500 dark:text-blue-400 truncate">تجارة - سنة 2</p>
+                    </div>
+                    <i class="fa-solid fa-gear text-xs text-gray-500 group-hover:rotate-90 transition duration-500"></i>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Sidebar Overlay -->
+        <div id="sidebar-overlay"
+            class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[50] hidden transition-opacity duration-300 opacity-0">
+        </div>
+
+        <!-- ==================== Main Content Area ==================== -->
+        <main class="flex-1 flex flex-col relative h-screen overflow-hidden">
+
+            <!-- ==================== Header ==================== -->
+            <header
+                class="h-20 glass-panel md:bg-transparent md:border-none flex items-center justify-between px-6 md:px-10 z-30 shrink-0">
+                <div class="flex items-center gap-4">
+                    <button id="open-sidebar"
+                        class="md:hidden p-2 rounded-lg bg-white/5 hover:bg-white/10 transition active:scale-95 magnetic-btn">
+                        <i class="fa-solid fa-bars-staggered text-xl"></i>
+                    </button>
+                    <div>
+                        <h2 id="page-title-header"
+                            class="text-xl md:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-l from-blue-600 to-cyan-500 dark:from-white dark:to-blue-200">
+                            الرئيسية</h2>
+                        <div id="breadcrumb" class="breadcrumb mt-1 hidden md:flex">
+                            <!-- Breadcrumb injected here -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-3 md:gap-4">
+                    <button id="conn-btn"
+                        class="conn-btn w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 relative overflow-hidden transition active:scale-90 magnetic-btn"
+                        title="حالة الاتصال">
+                        <i class="fa-solid fa-wifi action-icon-primary icon-wifi text-emerald-400 text-lg"></i>
+                        <i class="fa-solid fa-wifi action-icon-secondary icon-slash text-rose-500 text-lg"></i>
+                    </button>
+
+                    <button id="theme-btn"
+                        class="theme-btn w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 relative overflow-hidden transition active:scale-90 magnetic-btn"
+                        title="تبديل المظهر">
+                        <i class="fa-solid fa-sun action-icon-primary icon-sun text-yellow-400 text-lg"></i>
+                        <i class="fa-solid fa-moon action-icon-secondary icon-moon text-blue-300 text-lg"></i>
+                    </button>
+
+                    <button id="notif-btn"
+                        class="w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 flex items-center justify-center transition relative active:scale-90 magnetic-btn"
+                        title="الإشعارات">
+                        <i class="fa-regular fa-bell text-lg text-gray-300"></i>
+                        <span
+                            class="absolute top-2 right-2 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-[var(--bg-main)] animate-pulse"></span>
+                    </button>
+                </div>
+            </header>
+
+            <!-- ==================== Dynamic Content Section ==================== -->
+            <div id="app-content" class="flex-1 overflow-y-auto p-4 md:p-8 relative scroll-smooth">
+                <div class="pull-refresh-indicator" id="pull-refresh-indicator">
+                    <i class="fa-solid fa-arrow-rotate-right text-blue-500"></i>
+                </div>
+                <!-- Page content will be mounted here -->
+            </div>
+
+            <!-- ==================== Bottom Navigation ==================== -->
+            <nav id="bottom-nav" class="fixed bottom-0 left-0 right-0 md:hidden z-40 nav-hidden m-4 mb-4">
+                <div
+                    class="glass-panel rounded-2xl px-6 py-3 flex justify-between items-center shadow-2xl shadow-black/50 bg-opacity-95 backdrop-blur-xl border border-white/10">
+                    <button id="nav-home"
+                        class="flex flex-col items-center gap-1 text-gray-400 hover:text-blue-400 transition magnetic-btn">
+                        <i class="fa-solid fa-house text-lg"></i>
+                        <span class="text-[10px]">الرئيسية</span>
+                    </button>
+                    <button id="nav-menu"
+                        class="flex flex-col items-center gap-1 text-gray-400 hover:text-blue-400 transition magnetic-btn">
+                        <i class="fa-solid fa-bars-staggered text-lg"></i>
+                        <span class="text-[10px]">القائمة</span>
+                    </button>
+                    <button id="center-action-btn"
+                        class="w-14 h-14 -mt-10 rounded-full bg-gradient-to-r from-blue-600 to-cyan-500 text-white flex items-center justify-center shadow-lg shadow-blue-500/40 active:scale-90 transition transform border-4 dark:border-[#0f172a] dark:oled:border-black border-white magnetic-btn">
+                        <i class="fa-solid fa-bolt text-xl"></i>
+                    </button>
+                    <button id="nav-bookmarks"
+                        class="flex flex-col items-center gap-1 text-gray-400 hover:text-blue-400 transition magnetic-btn">
+                        <i class="fa-regular fa-bookmark text-lg"></i>
+                        <span class="text-[10px]">محفوظات</span>
+                    </button>
+                    <button id="nav-settings"
+                        class="flex flex-col items-center gap-1 text-gray-400 hover:text-blue-400 transition magnetic-btn">
+                        <i class="fa-solid fa-gear text-lg"></i>
+                        <span class="text-[10px]">إعدادات</span>
+                    </button>
+                </div>
+            </nav>
+
+        </main>
+    </div>
+
+    <!-- ==================== Include Page Templates ==================== -->
+    <!-- Lectures Page Template - محسّن -->
+    <template id="page-lectures">
+        <div class="container mx-auto max-w-7xl pb-24">
+            <!-- Header with Stats -->
+            <div class="glass-panel rounded-3xl p-6 md:p-8 mb-6 scroll-animate">
+                <div class="flex items-center justify-between flex-wrap gap-6">
+                    <div class="flex items-center gap-4">
+                        <div
+                            class="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500/20 to-purple-600/20 flex items-center justify-center border border-blue-500/20 animate-float">
+                            <i class="fa-solid fa-chalkboard-user text-3xl text-blue-400"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-2xl md:text-3xl font-bold mb-1 gradient-text">المحاضرات</h2>
+                            <p class="text-gray-500 dark:text-gray-300 text-xs md:text-sm">جميع المحاضرات والدروس
+                                التعليمية</p>
+                        </div>
+                    </div>
+
+                    <!-- Stats Container -->
+                    <div id="lectures-stats" class="flex-shrink-0">
+                        <!-- Stats will be injected here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Breadcrumb Navigation -->
+            <div class="glass-panel rounded-2xl p-4 mb-6 scroll-animate">
+                <div id="lectures-breadcrumb" class="flex items-center gap-2 text-sm flex-wrap">
+                    <!-- Breadcrumb will be injected here -->
+                </div>
+            </div>
+
+            <!-- Error State -->
+            <div id="lectures-error" class="glass-panel rounded-2xl p-8 text-center hidden scroll-animate">
+                <div class="w-20 h-20 rounded-full bg-red-500/10 flex items-center justify-center mx-auto mb-4">
+                    <i class="fa-solid fa-wifi-slash text-3xl text-red-500"></i>
+                </div>
+                <h3 class="text-lg font-bold mb-2">لا يوجد اتصال بالإنترنت</h3>
+                <p class="text-gray-500 dark:text-gray-300 mb-4">تحقق من الاتصال بالإنترنت أو استعرض البيانات المحفوظة
+                </p>
+                <button onclick="App.Router.go('lectures', false, false)"
+                    class="px-6 py-2 rounded-lg bg-blue-500 hover:bg-blue-600 text-white text-sm font-medium transition">
+                    إعادة المحاولة
+                </button>
+            </div>
+
+            <!-- Lectures Grid -->
+            <div id="lectures-container">
+                <!-- Lectures will be injected here -->
+            </div>
+        </div>
+    </template>
+
+    <!-- Summaries Page Template - محسّن -->
+    <template id="page-summaries">
+        <div class="container mx-auto max-w-6xl pb-24">
+            <!-- Header with Stats -->
+            <div class="glass-panel rounded-3xl p-6 md:p-8 mb-6 scroll-animate">
+                <div class="flex items-center justify-between flex-wrap gap-6">
+                    <div class="flex items-center gap-4">
+                        <div
+                            class="w-16 h-16 rounded-2xl bg-gradient-to-br from-cyan-500/20 to-teal-600/20 flex items-center justify-center border border-cyan-500/20 animate-float">
+                            <i class="fa-solid fa-file-pen text-3xl text-cyan-400"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-2xl md:text-3xl font-bold mb-1 gradient-text">الملخصات</h2>
+                            <p class="text-gray-500 dark:text-gray-300 text-xs md:text-sm">ملخصات شاملة لجميع المواد
+                                الدراسية</p>
+                        </div>
+                    </div>
+
+                    <!-- Stats Container -->
+                    <div id="summaries-stats" class="flex-shrink-0">
+                        <!-- Stats will be injected here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Breadcrumb Navigation -->
+            <div class="glass-panel rounded-2xl p-4 mb-6 scroll-animate">
+                <div id="summaries-breadcrumb" class="flex items-center gap-2 text-sm flex-wrap">
+                    <!-- Breadcrumb will be injected here -->
+                </div>
+            </div>
+
+            <!-- Error State -->
+            <div id="summaries-error" class="glass-panel rounded-2xl p-8 text-center hidden scroll-animate">
+                <div class="w-20 h-20 rounded-full bg-red-500/10 flex items-center justify-center mx-auto mb-4">
+                    <i class="fa-solid fa-wifi-slash text-3xl text-red-500"></i>
+                </div>
+                <h3 class="text-lg font-bold mb-2">لا يوجد اتصال بالإنترنت</h3>
+                <p class="text-gray-500 dark:text-gray-300 mb-4">تحقق من الاتصال بالإنترنت أو استعرض البيانات المحفوظة
+                </p>
+                <button onclick="App.Router.go('summaries', false, false)"
+                    class="px-6 py-2 rounded-lg bg-cyan-500 hover:bg-cyan-600 text-white text-sm font-medium transition">
+                    إعادة المحاولة
+                </button>
+            </div>
+
+            <!-- Summaries List -->
+            <div id="summaries-container">
+                <!-- Summaries will be injected here -->
+            </div>
+        </div>
+    </template>
+
+    <!-- Settings Page Template - مع زر مسح الكاش -->
+    <template id="page-settings">
+        <div class="container mx-auto max-w-2xl space-y-6 pb-24">
+            <!-- Profile Card -->
+            <div class="glass-panel rounded-2xl p-6 flex items-center gap-4 scroll-animate">
+                <img src="https://ui-avatars.com/api/?name=Student&background=667eea&color=fff&size=128" alt="User"
+                    class="w-20 h-20 rounded-full border-4 border-blue-500/20">
+                <div>
+                    <h3 class="text-xl font-bold">طالب جامعي</h3>
+                    <p class="text-gray-400 text-sm">student@university.edu.sa</p>
+                    <button
+                        class="mt-2 text-xs bg-blue-600/20 text-blue-500 px-3 py-1 rounded-full hover:bg-blue-600/40 transition magnetic-btn">تعديل</button>
+                </div>
+            </div>
+
+            <!-- Display Settings -->
+            <div class="glass-panel rounded-2xl p-6 scroll-animate">
+                <h3 class="text-lg font-bold mb-4 border-b border-gray-200 dark:border-white/5 pb-2">المظهر والعرض</h3>
+
+                <!-- Dark Mode Toggle -->
+                <div class="flex items-center justify-between mb-6">
+                    <div class="flex items-center gap-3">
+                        <div
+                            class="w-10 h-10 rounded-lg bg-purple-500/10 flex items-center justify-center text-purple-400">
+                            <i class="fa-solid fa-moon"></i>
+                        </div>
+                        <div>
+                            <p class="font-bold">الوضع الليلي</p>
+                            <p class="text-xs text-gray-400">واجهة داكنة مريحة للعين</p>
+                        </div>
+                    </div>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" id="dark-mode-toggle" class="sr-only peer">
+                        <div
+                            class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-purple-600">
+                        </div>
+                    </label>
+                </div>
+
+                <!-- OLED Mode Toggle -->
+                <div class="flex items-center justify-between" id="oled-toggle-container">
+                    <div class="flex items-center gap-3">
+                        <div
+                            class="w-10 h-10 rounded-lg bg-black border border-gray-700 flex items-center justify-center text-white">
+                            <i class="fa-solid fa-lightbulb"></i>
+                        </div>
+                        <div>
+                            <p class="font-bold">وضع OLED (أسود نقي)</p>
+                            <p class="text-xs text-gray-400">توفير طاقة البطارية وتباين عالي</p>
+                        </div>
+                    </div>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" id="oled-mode-toggle" class="sr-only peer">
+                        <div
+                            class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-black border peer-checked:border-white/50">
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Performance Settings -->
+            <div class="glass-panel rounded-2xl p-6 scroll-animate">
+                <h3 class="text-lg font-bold mb-4 border-b border-gray-200 dark:border-white/5 pb-2">الأداء والتأثيرات
+                </h3>
+
+                <!-- Animations Toggle -->
+                <div class="flex items-center justify-between mb-6">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-lg bg-blue-500/10 flex items-center justify-center text-blue-400">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        </div>
+                        <div>
+                            <p class="font-bold">التأثيرات المتقدمة</p>
+                            <p class="text-xs text-gray-400">تفعيل الحركات والانتقالات</p>
+                        </div>
+                    </div>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" id="animations-toggle" class="sr-only peer" checked>
+                        <div
+                            class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600">
+                        </div>
+                    </label>
+                </div>
+
+                <!-- Particles Toggle -->
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-lg bg-cyan-500/10 flex items-center justify-center text-cyan-400">
+                            <i class="fa-solid fa-sparkles"></i>
+                        </div>
+                        <div>
+                            <p class="font-bold">الخلفية المتحركة</p>
+                            <p class="text-xs text-gray-400">تأثيرات الجزيئات في الخلفية</p>
+                        </div>
+                    </div>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" id="particles-toggle" class="sr-only peer" checked>
+                        <div
+                            class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-cyan-600">
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Storage Management -->
+            <div class="glass-panel rounded-2xl p-6 scroll-animate">
+                <h3 class="text-lg font-bold mb-4 border-b border-gray-200 dark:border-white/5 pb-2">إدارة التخزين</h3>
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="font-bold">مسح البيانات المحفوظة</p>
+                        <p class="text-xs text-gray-400">حذف الملفات المخزنة للعمل بدون إنترنت</p>
+                    </div>
+                    <button id="clear-cache-btn"
+                        class="px-4 py-2 rounded-lg bg-orange-500/10 hover:bg-orange-500/20 text-orange-500 text-sm font-bold transition magnetic-btn">
+                        <i class="fa-solid fa-trash-can ml-1"></i>
+                        مسح
+                    </button>
+                </div>
+            </div>
+
+            <!-- Reset Zone -->
+            <div class="glass-panel rounded-2xl p-6 border border-red-500/20 bg-red-500/5 scroll-animate">
+                <h3 class="text-lg font-bold mb-4 text-red-500">منطقة الخطر</h3>
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="font-bold">إعادة ضبط المصنع</p>
+                        <p class="text-xs text-gray-400">مسح كافة التفضيلات والعودة للوضع الافتراضي</p>
+                    </div>
+                    <button id="reset-settings-btn"
+                        class="px-4 py-2 rounded-lg bg-red-500 hover:bg-red-600 text-white text-sm font-bold transition shadow-lg shadow-red-500/20 magnetic-btn">
+                        إعادة تعيين
+                    </button>
+                </div>
+            </div>
+
+            <div class="text-center text-xs text-gray-500 pt-4">
+                Dof3atna App v7.0 Enhanced | Offline Support + Clean Architecture
+            </div>
+        </div>
+    </template>
+
+    <!-- Home Page Template - محسّن -->
+    <template id="page-home">
+        <div class="container mx-auto max-w-6xl space-y-8 pb-24">
+            <!-- Hero Section -->
+            <div class="glass-panel rounded-3xl p-6 md:p-10 relative overflow-hidden group scroll-animate">
+                <div class="relative z-10">
+                    <h2 class="text-2xl md:text-4xl font-bold mb-2">مرحباً، يا بطل! 👋</h2>
+                    <p class="text-gray-600 dark:text-blue-100/80 text-sm md:text-lg max-w-2xl leading-relaxed">
+                        تم تحسين النظام ليعمل بأقصى سرعة مع دعم العمل بدون إنترنت. استمتع بوضع OLED الجديد لتجربة بصرية
+                        مريحة.
+                    </p>
+                </div>
+                <div
+                    class="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-blue-600/20 to-transparent opacity-50">
+                </div>
+                <i
+                    class="fa-solid fa-rocket absolute -bottom-8 -left-8 text-9xl text-blue-500/10 rotate-45 group-hover:scale-110 transition duration-700"></i>
+            </div>
+
+            <!-- Quick Access Section -->
+            <section class="scroll-animate">
+                <div class="flex items-center justify-between mb-4 px-2">
+                    <h3 class="text-lg font-bold flex items-center gap-2">
+                        <i class="fa-solid fa-bolt text-yellow-400"></i> وصول سريع
+                    </h3>
+                    <span id="show-all-pages"
+                        class="text-xs text-blue-500 cursor-pointer hover:text-blue-400 transition bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20 magnetic-btn">عرض
+                        الكل</span>
+                </div>
+                <div class="swiper mySwiper w-full">
+                    <div class="swiper-wrapper" id="quick-access-slides">
+                        <!-- Slides will be injected here -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Stats & Recent Section -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Recent Files -->
+                <section class="glass-panel rounded-2xl p-5 col-span-1 md:col-span-2 scroll-animate">
+                    <h3 class="text-lg font-bold mb-4 flex items-center gap-2">
+                        <i class="fa-regular fa-clock text-blue-400"></i> أضيف حديثاً
+                    </h3>
+                    <div class="space-y-3" id="recent-files-list">
+                        <!-- Recent files will be injected here -->
+                    </div>
+                </section>
+
+                <!-- Stats Card -->
+                <section class="glass-panel rounded-2xl p-5 flex flex-col justify-between scroll-animate">
+                    <div>
+                        <h3 class="text-lg font-bold mb-4 flex items-center gap-2">
+                            <i class="fa-solid fa-chart-pie text-cyan-400"></i> إحصائياتي
+                        </h3>
+                        <canvas id="stats-chart" width="200" height="200"></canvas>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Notifications Section -->
+            <section class="glass-panel rounded-2xl p-5 scroll-animate">
+                <h3 class="text-lg font-bold mb-4 flex items-center gap-2">
+                    <i class="fa-solid fa-bell text-amber-400"></i> آخر التحديثات
+                </h3>
+                <div class="space-y-3" id="notifications-list">
+                    <!-- Notifications injected here -->
+                </div>
+            </section>
+        </div>
+    </template>
+
+    <!-- Notifications Page Template -->
+    <template id="page-notifications">
+        <div class="container mx-auto max-w-4xl pb-24">
+            <!-- Header -->
+            <div class="glass-panel rounded-3xl p-8 mb-6 scroll-animate">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h2 class="text-3xl font-bold mb-2 gradient-text">الإشعارات</h2>
+                        <p class="text-gray-500 dark:text-gray-300 text-sm">جميع التحديثات والرسائل الهامة</p>
+                    </div>
+                    <button id="mark-all-read"
+                        class="px-4 py-2 rounded-lg bg-blue-500/10 text-blue-500 text-sm hover:bg-blue-500/20 transition magnetic-btn">
+                        تحديد الكل كمقروء
+                    </button>
+                </div>
+            </div>
+
+            <!-- Notifications List -->
+            <div class="space-y-4" id="notifications-full-list">
+                <!-- Notifications injected here -->
+            </div>
+        </div>
+    </template>
+
+    <!-- Default Page Template -->
+    <template id="page-default">
+        <div class="container mx-auto max-w-5xl h-full flex flex-col pb-24">
+            <!-- Page Header Card -->
+            <div id="page-header-card"
+                class="glass-panel rounded-3xl p-8 mb-6 flex flex-col md:flex-row items-center md:items-start gap-6 text-center md:text-right relative overflow-hidden scroll-animate">
+                <!-- Content injected dynamically -->
+            </div>
+
+            <!-- Coming Soon Card -->
+            <div
+                class="flex-1 glass-panel rounded-3xl flex flex-col items-center justify-center p-10 text-center border-dashed border-2 border-gray-200 dark:border-white/10 bg-gray-50/50 dark:bg-white/[0.02] scroll-animate">
+                <div
+                    class="w-20 h-20 rounded-full bg-gray-100 dark:bg-white/5 flex items-center justify-center mb-4 animate-pulse">
+                    <i class="fa-solid fa-layer-group text-2xl text-gray-400"></i>
+                </div>
+                <h3 class="text-lg font-bold text-gray-600 dark:text-gray-300 mb-2">قريباً</h3>
+                <p class="text-xs text-gray-400 mb-6">نعمل حالياً على إضافة المحتوى</p>
+                <button id="back-home-btn"
+                    class="px-6 py-2 rounded-full text-sm border border-gray-300 dark:border-white/20 hover:bg-white/5 transition magnetic-btn">
+                    العودة للرئيسية
+                </button>
+            </div>
+        </div>
+    </template>
+
+    <!-- ==================== External Scripts ==================== -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+
+    <!-- ==================== App Scripts - New Structure ==================== -->
+
+    <!-- Core -->
+    <script src="js/core/namespace.js"></script>
+    <script src="js/core/constants.js"></script>
+    <script src="js/core/state.js"></script>
+    <script src="js/core/router.js"></script>
+
+    <!-- Utils -->
+    <script src="js/utils/utils.js"></script>
+    <script src="js/utils/cache.js"></script>
+    <script src="js/utils/api.js"></script>
+
+    <!-- UI -->
+    <script src="js/ui/ui.js"></script>
+    <script src="js/ui/effects.js"></script>
+    <script src="js/ui/toast.js"></script>
+
+    <!-- Pages -->
+    <script src="js/pages/home/home.js"></script>
+    <script src="js/pages/lectures/lectures.js"></script>
+    <script src="js/pages/summaries/summaries.js"></script>
+    <script src="js/pages/settings/settings.js"></script>
+    <script src="js/pages/notifications/notifications.js"></script>
+    <script src="js/pages/default/default.js"></script>
+
+    <!-- Init -->
+    <script src="js/core/init.js"></script>
+
+</body>
+
+</html>

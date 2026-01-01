@@ -1,0 +1,313 @@
+.skeleton-card {
+    background: linear-gradient(90deg, 
+        rgba(255, 255, 255, 0.05) 0%,
+        rgba(255, 255, 255, 0.15) 50%,
+        rgba(255, 255, 255, 0.05) 100%);
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s ease-in-out infinite;
+    border-radius: 1rem;
+    height: 300px;
+    position: relative;
+    overflow: hidden;
+}
+
+.skeleton-card::before {
+    content: '';
+    position: absolute;
+    top: 1.5rem;
+    left: 1.5rem;
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 0.75rem;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.skeleton-card::after {
+    content: '';
+    position: absolute;
+    bottom: 1.5rem;
+    left: 1.5rem;
+    right: 1.5rem;
+    height: 2.5rem;
+    border-radius: 0.5rem;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.skeleton-list-item {
+    background: linear-gradient(90deg, 
+        rgba(255, 255, 255, 0.05) 0%,
+        rgba(255, 255, 255, 0.15) 50%,
+        rgba(255, 255, 255, 0.05) 100%);
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s ease-in-out infinite;
+    border-radius: 1rem;
+    height: 80px;
+    position: relative;
+    overflow: hidden;
+}
+
+.skeleton-list-item::before {
+    content: '';
+    position: absolute;
+    top: 1.25rem;
+    left: 1.25rem;
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 0.75rem;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.skeleton-list-item::after {
+    content: '';
+    position: absolute;
+    top: 1.5rem;
+    left: 6rem;
+    right: 6rem;
+    height: 1rem;
+    border-radius: 0.25rem;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+@keyframes skeleton-loading {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+.breadcrumb-btn {
+    font-size: 0.875rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.375rem;
+    transition: all 0.2s ease;
+    color: var(--text-main);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.breadcrumb-btn:hover {
+    color: #3b82f6;
+    background: rgba(59, 130, 246, 0.1);
+}
+
+.breadcrumb-btn:first-child {
+    color: #3b82f6;
+    font-weight: 600;
+}
+
+.folder-card {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.folder-card:hover {
+    transform: translateY(-4px);
+}
+
+.folder-card:active {
+    transform: translateY(-2px);
+}
+
+.file-card {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.file-card:hover {
+    transform: translateY(-4px);
+}
+
+.folder-item {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.folder-item:hover {
+    transform: translateY(-2px);
+}
+
+.folder-item:active {
+    transform: translateY(-1px);
+}
+
+.file-item {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.file-item:hover {
+    transform: translateY(-2px);
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+@media (max-width: 768px) {
+    .stats-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.75rem;
+    }
+}
+
+.transition-smooth {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.transition-bounce {
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+.hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+}
+
+.loading-overlay {
+    position: relative;
+    pointer-events: none;
+}
+
+.loading-overlay::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.05);
+    backdrop-filter: blur(2px);
+    border-radius: inherit;
+}
+
+.cache-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    background: rgba(59, 130, 246, 0.1);
+    color: #3b82f6;
+    border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+html.dark .cache-indicator {
+    background: rgba(59, 130, 246, 0.15);
+    color: #60a5fa;
+}
+
+.offline-banner {
+    position: fixed;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    padding: 0.75rem 1.5rem;
+    border-radius: 9999px;
+    background: rgba(245, 158, 11, 0.95);
+    backdrop-filter: blur(10px);
+    color: white;
+    font-size: 0.875rem;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 5rem 2rem;
+    text-align: center;
+}
+
+.empty-state-icon {
+    width: 6rem;
+    height: 6rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    font-size: 2.5rem;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(147, 51, 234, 0.1));
+    color: rgba(59, 130, 246, 0.5);
+}
+
+.empty-state-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 0.5rem;
+}
+
+.empty-state-description {
+    font-size: 0.875rem;
+    color: var(--text-main);
+    opacity: 0.6;
+}
+
+@media (max-width: 768px) {
+    .skeleton-card {
+        height: 250px;
+    }
+    
+    .skeleton-list-item {
+        height: 70px;
+    }
+    
+    .empty-state {
+        padding: 3rem 1rem;
+    }
+    
+    .empty-state-icon {
+        width: 5rem;
+        height: 5rem;
+        font-size: 2rem;
+    }
+}
+
+html.dark .skeleton-card,
+html.dark .skeleton-list-item {
+    background: linear-gradient(90deg, 
+        rgba(255, 255, 255, 0.03) 0%,
+        rgba(255, 255, 255, 0.08) 50%,
+        rgba(255, 255, 255, 0.03) 100%);
+    background-size: 200% 100%;
+}
+
+html.dark .skeleton-card::before,
+html.dark .skeleton-card::after,
+html.dark .skeleton-list-item::before,
+html.dark .skeleton-list-item::after {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+html.oled .glass-panel {
+    background: rgba(20, 20, 20, 0.95);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+html.oled .skeleton-card,
+html.oled .skeleton-list-item {
+    background: linear-gradient(90deg, 
+        rgba(255, 255, 255, 0.02) 0%,
+        rgba(255, 255, 255, 0.06) 50%,
+        rgba(255, 255, 255, 0.02) 100%);
+    background-size: 200% 100%;
+}

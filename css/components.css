@@ -1,0 +1,147 @@
+.glass-panel {
+    background: var(--bg-panel);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: var(--glass-border);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-panel:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.action-btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.action-icon-primary,
+.action-icon-secondary {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform-origin: center center;
+    transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+html:not(.dark) .theme-btn .icon-sun {
+    transform: translate(-50%, -50%) rotate(0deg) scale(1);
+    opacity: 1;
+}
+
+html:not(.dark) .theme-btn .icon-moon {
+    transform: translate(-50%, -50%) rotate(90deg) scale(0);
+    opacity: 0;
+}
+
+html.dark .theme-btn .icon-sun {
+    transform: translate(-50%, -50%) rotate(-90deg) scale(0);
+    opacity: 0;
+}
+
+html.dark .theme-btn .icon-moon {
+    transform: translate(-50%, -50%) rotate(0deg) scale(1);
+    opacity: 1;
+}
+
+.conn-btn:not(.is-offline) .icon-wifi {
+    transform: translate(-50%, -50%) rotate(0deg) scale(1);
+    opacity: 1;
+}
+
+.conn-btn:not(.is-offline) .icon-slash {
+    transform: translate(-50%, -50%) rotate(90deg) scale(0);
+    opacity: 0;
+}
+
+.conn-btn.is-offline .icon-wifi {
+    transform: translate(-50%, -50%) rotate(-90deg) scale(0);
+    opacity: 0;
+}
+
+.conn-btn.is-offline .icon-slash {
+    transform: translate(-50%, -50%) rotate(0deg) scale(1);
+    opacity: 1;
+}
+
+.nav-hidden {
+    transform: translateY(150%);
+}
+
+#bottom-nav {
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.875rem;
+    color: var(--text-main);
+    opacity: 0.7;
+}
+
+.breadcrumb-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    transition: opacity 0.2s;
+}
+
+.breadcrumb-item:hover {
+    opacity: 1;
+    cursor: pointer;
+}
+
+.breadcrumb-separator {
+    opacity: 0.5;
+}
+
+.gradient-text {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradient 8s ease infinite;
+}
+
+.skeleton {
+    background: linear-gradient(90deg, rgba(255,255,255,0.05) 25%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0.05) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+    border-radius: 8px;
+}
+
+.skeleton-box {
+    background: linear-gradient(90deg, 
+        rgba(255, 255, 255, 0.05) 0%, 
+        rgba(255, 255, 255, 0.15) 50%, 
+        rgba(255, 255, 255, 0.05) 100%);
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s infinite;
+}
+
+.card-hover {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-hover:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: var(--shadow-xl);
+}
+
+.swipeable-card {
+    touch-action: pan-y;
+    transition: transform 0.3s ease;
+}
+
+.progress-ring {
+    transform: rotate(-90deg);
+}
+
+.progress-ring-circle {
+    transition: stroke-dashoffset 0.35s;
+    transform-origin: 50% 50%;
+}

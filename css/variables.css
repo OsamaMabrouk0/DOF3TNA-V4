@@ -1,0 +1,56 @@
+:root {
+    --bg-main: #f8fafc;
+    --bg-panel: rgba(255, 255, 255, 0.85);
+    --text-main: #1e293b;
+    --border-color: rgba(203, 213, 225, 0.4);
+    --glass-border: 1px solid rgba(255, 255, 255, 0.4);
+    
+    --scroll-thumb: rgba(59, 130, 246, 0.3);
+    --scroll-track: transparent;
+    --scroll-hover: rgba(59, 130, 246, 0.6);
+
+    --bg-primary: var(--bg-main);
+    --bg-tertiary: rgba(150, 150, 150, 0.1);
+    --primary-color: #3b82f6;
+    
+    --transition-slow: opacity 0.5s ease;
+    --transition-fast: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    --space-xs: 0.5rem;
+    --space-sm: 0.75rem;
+    --space-md: 1rem;
+    --space-lg: 1.25rem;
+    --space-xl: 1.5rem;
+    --space-2xl: 2rem;
+
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.16);
+    --shadow-xl: 0 12px 32px rgba(0, 0, 0, 0.20);
+
+    --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --gradient-blue: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
+    --gradient-purple: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
+}
+
+html.dark {
+    --bg-main: #0f172a;
+    --bg-panel: rgba(17, 25, 40, 0.7);
+    --text-main: #ffffff;
+    --border-color: rgba(255, 255, 255, 0.08);
+    --glass-border: 1px solid rgba(255, 255, 255, 0.08);
+    --scroll-thumb: rgba(255, 255, 255, 0.15);
+    --scroll-hover: rgba(255, 255, 255, 0.3);
+    --bg-tertiary: rgba(255, 255, 255, 0.1);
+
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.5);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.6);
+    --shadow-xl: 0 12px 32px rgba(0, 0, 0, 0.7);
+}
+
+html.oled {
+    --bg-main: #000000;
+    --bg-panel: rgba(20, 20, 20, 0.95);
+    --glass-border: 1px solid rgba(255, 255, 255, 0.15);
+}
